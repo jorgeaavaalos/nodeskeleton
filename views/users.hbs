@@ -1,0 +1,27 @@
+<h1>Bienvenido, usuario!</h1>
+
+<p><a href="/users/crear_thread">Crear Thread</a></p>
+<p>Esta es una lísta de threads que tú haz creado, puedes editarlos (update) o borrarlos (delete)</p>
+<div class="threads_created">
+    <ul>
+        <li>
+            <a href="/thread">Thread</a>
+            <a href="/thread/edit">Edit</a>
+            <a href="/thread/delete">Delete</a>
+        </li>
+        <li>
+            <a href="/thread">Thread</a>
+            <a href="/thread/edit">Edit</a>
+            <a href="/thread/delete">Delete</a>
+        </li>
+    </ul>
+</div>
+<p>Aquí deben de aparecer los threads (get)</p>
+
+<div class="threads">
+    <div class="thread" id="thread_id"></div>
+</div>
+<form action="/search" method="GET">
+    <input type="text" placeholder="Search">
+    <input type="submit" value="Search">
+</form>
