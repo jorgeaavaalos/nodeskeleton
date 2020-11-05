@@ -14,17 +14,32 @@ function getUser(username, callback) {
     })
 }
 
-function getThreadsBy10(username, callback) {
-    let sql = "SELECT * FROM threads ORDER BY thread_time DESC LIMIT 10;";
-    // const inserts = [username];
-    // const query = mysql.format(sql, inserts);
-    pool.executeQuery(sql, function(err, results) {
+function getThreadsBy10(page, callback) {
+    let sql = "SELECT *, (SELECT COUNT(thread_id) FROM threads) as count_thread FROM threads ORDER BY thread_id DESC LIMIT ?, 10";
+    const inserts = [page];
+    const query = mysql.format(sql, inserts);
+    pool.executeQuery(query, function(err, results) {
         if (err) {
             throw err;
         }
         callback(null, results);
     })
 }
+
+function getComments(threadID, callback) {
+    let sql = "SELECT * FROM comments WHERE thread_id = ?;";
+    const inserts = [threadID];
+    const query = mysql.format(sql, inserts);
+    // console.log(sql)
+    pool.executeQuery(query, function(err, results) {
+        if (err) {
+            throw err;
+        }
+        callback(null, results);
+    })
+}
+
+
 
 // POST
 function postUser(username, email, password, callback) {
@@ -106,3 +121,4 @@ module.exports.postUser = postUser;
 module.exports.editThread = editThread;
 module.exports.editComment = editComment;
 module.exports.getThreadsBy10 = getThreadsBy10;
+module.exports.getComments = getComments;

@@ -12,12 +12,47 @@ router.get('/', function(req, res) {
     }
     // console.log('Éxito');
     // console.log(results);
-    queries.getThreadsBy10(null, function(err, results) {
-      // console.log(results);
-      res.render('index', { title: 'Express', threads: results });
+    let page = 0;
+    if(req.params.page != null) {
+      page = req.params.page;
+    }
+
+    console.log("https://picsum.photos/200/300?random499&blur".length);
+    console.log("https://picsum.photos/200/300?random49&blur".length);
+    page *= 10;
+    console.log(page);
+    queries.getThreadsBy10(page, function(err, results) {
+      // console.log(results.rows);
+      console.log(results.rows[0])
+      // console.log(results)
+      res.render('index', { title: 'Express', threads: results.rows, pages: results.rows[0].count_thread / 10 });
     })
   })
 });
+
+// /* GET home page. */
+// router.get('/:page', function(req, res) {
+//   queries.getUser('jorge', function(err, results) {
+//     if(err) {
+//       throw err;
+//     }
+//     // console.log('Éxito');
+//     // console.log(results);
+//     let page = 0;
+//     if(req.params.page != null) {
+//       page = req.params.page;
+//     }
+
+//     console.log(req.params);
+//     page *= 10;
+//     console.log(page);
+//     queries.getThreadsBy10(page, function(err, results) {
+//       // console.log(results.rows);
+//       // console.log(results.rows[0])
+//       res.render('index', { title: 'Express', threads: results.rows });
+//     })
+//   })
+// });
 
 /* POST create user. */
 router.post('/', function(req, res) {

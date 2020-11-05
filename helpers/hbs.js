@@ -1,9 +1,6 @@
-// const moment = require('moment');
-
 module.exports = {
-    formatDate: function (date, format) {
-        // return moment(date).utc().format(format)
-        return 0;
+    formatDate: function (date, options) {
+        return date.toString().slice(4, 24);
     },
     truncate: function (str, len) {
         if (str.length > len && str.length > 0) {
@@ -41,4 +38,13 @@ module.exports = {
             ' selected="selected"$&'
         )
     },
+    noBlur: function(link) {
+        if(link.length === 42)
+            return link.slice(0, 37);
+        else if(link.length === 43)
+            return link.slice(0, 38);
+        else {
+            return link.slice(0, 39)
+        }
+    }
 }

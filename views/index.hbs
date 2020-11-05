@@ -8,10 +8,20 @@
     <input type="email" name="user_email" id="user_email" placeholder="Email">
     <input type="submit" value="Create">
 </form>
-<p>List of users:</p>
 
-{{!-- {{#if threads}}
 {{#each threads}}
-{{this}}
+<div class="thread" id="thread-{{this.thread_id}}">
+    <div class="thread-info">
+        <span class="thread-title">Title: {{this.thread_title}}</span>
+        <span class="thread-time">Date: {{formatDate this.thread_time}}</span>
+    </div>
+    <div class="thread-content">
+        <a href="/thread/{{this.thread_id}}">
+            <img src="{{noBlur this.thread_image}}" alt="Image">
+        </a>
+        <p>{{this.thread_text}}</p>
+    </div>
+</div>
 {{/each}}
-{{/if}} --}}
+
+{{pages}}

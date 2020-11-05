@@ -1,1 +1,14 @@
 <h1>Hello thread!</h1>
+
+{{#each comments}}
+<div class="comment" id="comment-{{this.comment_id}}">
+    <div class="comment-info">
+        <span class="comment-title">Title: {{this.comment_title}}</span>
+        <span class="comment-time">Date: {{formatDate this.comment_time}}</span>
+    </div>
+    <div class="comment-content">
+        <img src="{{this.comment_image}}" alt="Image">
+        <p>{{this.comment_text}}</p>
+    </div>
+</div>
+{{/each}}
