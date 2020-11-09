@@ -1,27 +1,64 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-<p>Create user</p>
-<form action="/" method="POST">
-    <input type="text" name="username" id="username" placeholder="Username">
-    <input type="password" name="user_password" id="user_password" placeholder="Password">
-    <input type="email" name="user_email" id="user_email" placeholder="Email">
-    <input type="submit" value="Create">
-</form>
-
-{{#each threads}}
-<div class="thread" id="thread-{{this.thread_id}}">
-    <div class="thread-info">
-        <span class="thread-title">Title: {{this.thread_title}}</span>
-        <span class="thread-time">Date: {{formatDate this.thread_time}}</span>
+<div class="main-section">
+    <p>Sign up to participate and interact with other people!</p>
+    <a class="btn" href="#">
+        <i class="fab fa-twitter"></i>
+        <span>
+            Sign in with Twitter
+        </span>
+    </a>
+    <a class="btn" href="#">
+        <i class="fab fa-facebook"></i>
+        <span>
+            Sign in with Facebook
+        </span>
+    </a>
+    <a class="btn" href="#">
+        <i class="fab fa-instagram"></i>
+        <span>
+            Sign in with Instagram
+        </span>
+    </a>
+    <a class="btn" href="#">
+        <i class="fab fa-google"></i>
+        <span>
+            Sign in with Google
+        </span>
+    </a>
+    <div class="line-break">
+        <span>Or</span>
     </div>
-    <div class="thread-content">
-        <a href="/thread/{{this.thread_id}}">
-            <img src="{{noBlur this.thread_image}}" alt="Image">
-        </a>
-        <p>{{this.thread_text}}</p>
+    <div class="user-form">
+        <form action="/login" method="post">
+            <input type="email" name="user_mail" id="user_mail" placeholder="E-mail">
+            <input type="password" name="user_password" id="user_password" placeholder="Password">
+            <input class="btn" type="submit" value="Login">
+        </form>
+        <div class="signup-description">
+            <h4>Don't have an account yet?</h4>
+            <a href="/login.html">Sign up</a>
+        </div>
+    </div>
+    <div class="user-form">
+        <form action="/signup.html" method="post">
+            <input type="email" name="new-user-email" id="new-user-email" placeholder="E-mail">
+            <input type="password" name="new-user-password" id="new-user-password" placeholder="Password">
+            <input type="text" name="new-user-name" id="new-user-name" placeholder="Name">
+            <input type="checkbox" name="new-check" id="new-check">
+            <label for="new-check">By signing up you agree to our Terms of Service and Privacy Policy.</label>
+            <input class="btn" type="submit" value="Sign Up">
+        </form>
+        <div class="signup-description">
+            <h4>Already have an account?</h4>
+            <a href="/login.html">Login</a>
+        </div>
     </div>
 </div>
-{{/each}}
-
-{{pages}}
+<div class="footer-section">
+    <p class="copyright-year">2020 &copy;</p>
+    <ul>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>

@@ -1,33 +1,35 @@
 var express = require('express');
-const db = require('../config/db.js');
 const queries = require('../controllers/queries.js');
-const mysql = require('mysql');
+const sessionController = require('../controllers/session_controller');
 var router = express.Router();
 
-/* GET thread page. */
-router.get('/', function(req, res, next) {
-    res.render('thread', { title: 'Thread' });
+router.get('/create', sessionController.checkSignIn, function(req, res) {
+    res.render('crear_thread', { title: 'Crear Thread' } );
 });
 
-/* GET thread page. */
-router.get('/:id', function(req, res, next) {
-    console.log(req.params.id)
-    queries.getComments(req.params.id, function(err, results) {
-        if(err) {
-            throw err;
-        }
-        res.render('thread', { title: 'Thread', comments: results.rows });
-    })
+router.post('/create', sessionController.checkSignIn, function(req, res) {
+    res.redirect('/user');
 });
 
 /* GET edit thread page. */
-router.get('/edit', function(req, res, next) {
+router.get('/edit', sessionController.checkSignIn, function(req, res, next) {
     res.render('thread_edit', { title: 'Edit Thread' });
 });
 
 /* GET delete thread page. */
-router.get('/delete', function(req, res, next) {
+router.get('/delete', sessionController.checkSignIn, function(req, res, next) {
     res.render('thread_delete', { title: 'Delete Thread' });
+});
+
+/* GET thread page. */
+router.get('/:id', function(req, res, next) {
+    queries.getComments(req.params.id, function(err, results) {
+        if(err) {
+            throw err;
+        }
+        // console.log(req.session);
+        res.render('thread', { title: 'Thread', comments: results.rows });
+    })
 });
 
 

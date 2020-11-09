@@ -1,6 +1,6 @@
 const mysql = require("mysql");
-// const session = require("express-session");
-// const MySQLStore = require("express-mysql-session")(session);
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 require("dotenv").config();
 
 const options = {
@@ -13,7 +13,7 @@ const options = {
 
 const pool = mysql.createPool(options);
 
-// const sessionStore = new MySQLStore({ expiration: 20 * 2000 }, pool);
+const sessionStore = new MySQLStore({ expiration: 20 * 2000 }, pool);
 
 function executeQuery(query, callback) {
 	pool.getConnection(function (err, connection) {
@@ -48,11 +48,11 @@ function executeQuery(query, callback) {
 pool.on("connection", function (connection) {
 	// connection.query('SET SESSION auto_increment_increment=1')
 	// console.log(connection.threadId);
-	console.log('Se creó una conexión en el pool');
+	// console.log('Se creó una conexión en el pool');
 });
 
 pool.on("release", function (connection) {
-	console.log("Se liberó una conexión con el id " + connection.threadId);
+	// console.log("Se liberó una conexión con el id " + connection.threadId);
 });
 
 pool.on("enqueue", function () {
@@ -60,7 +60,7 @@ pool.on("enqueue", function () {
 });
 
 pool.on("acquire", function (connection) {
-	console.log('Se dio una conexión con el id %d', connection.threadId);
+	// console.log('Se dio una conexión con el id %d', connection.threadId);
 });
 
 pool.on("warning", (e) => {
@@ -69,4 +69,4 @@ pool.on("warning", (e) => {
 });
 
 module.exports.executeQuery = executeQuery;
-// module.exports.sessionStore = sessionStore;
+module.exports.sessionStore = sessionStore;

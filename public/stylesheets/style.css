@@ -1,10 +1,11 @@
-body {
+/* body {
 	padding: 50px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+*/
 
 a {
-	color: #00b7ff;
+	color: black;
 }
 
 .thread-content,
@@ -16,4 +17,26 @@ a {
 .thread-content img,
 .comment-content img {
 	margin-right: 50px;
+}
+
+.menu {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.menu a {
+	margin-right: 20px;
+	display: inline-block;
+	padding: 1rem;
+	border: 1px solid black;
+	color: black;
+	text-decoration: none;
+}
+
+.menu a:hover {
+	background-color: antiquewhite;
+}
+
+.first-page {
+	background-color: antiquewhite;
 }

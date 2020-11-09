@@ -46,5 +46,31 @@ module.exports = {
         else {
             return link.slice(0, 39)
         }
+    },
+    createMenu: function(index, upperLimit) {
+        let html;
+        if(index != 1) {
+            html = `<a href="/user?page=${index - 1}">Back</a><a href="/user?page=${index}" class="page-number first-page">${index}</a>`
+        } else {
+            html = `<a href="/user?page=${index}" class="page-number first-page">${index}</a>`
+        }
+        let difference = upperLimit - index;
+        let index2 = index;
+        if(difference > 10) {
+            for(let x = 0; x < 10; x++) {
+                html +=  `<a href="/user?page=${index2 + 1}" class="page-number">${index2 + 1}</a>`;
+                index2++;
+            }
+        } else {
+            // console.log('Hay menos de diez cuadritos')
+            for(let x = 0; x < difference; x++) {
+                html +=  `<a href="/user?page=${index2 + 1}" class="page-number">${index2 + 1}</a>`;
+                index2++;
+            }
+        }
+        if(index != upperLimit) {
+            html += `<a href="/user?page=${index + 1}">Next</a>`;
+        }
+        return html;
     }
 }

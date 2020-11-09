@@ -3,8 +3,20 @@ const mysql = require('mysql');
 
 // GET
 function getUser(username, callback) {
-    let sql = "SELECT * FROM users WHERE username = ?;";
+    let sql = "SELECT * FROM users WHERE user_id = ?;";
     const inserts = [username];
+    const query = mysql.format(sql, inserts);
+    pool.executeQuery(query, function(err, results) {
+        if (err) {
+            throw err;
+        }
+        callback(null, results);
+    })
+}
+
+function getLogin(username, password, callback) {
+    let sql = "SELECT * FROM users WHERE user_mail = ? AND user_password = ?;";
+    const inserts = [username, password];
     const query = mysql.format(sql, inserts);
     pool.executeQuery(query, function(err, results) {
         if (err) {
@@ -53,6 +65,20 @@ function postUser(username, email, password, callback) {
         callback(null, results);
     })
 }
+
+// POST
+// function postThread(thread_title, thread_text, user_id, callback) {
+//     let image = image;
+//     let sql = "INSERT INTO users(username, user_mail, user_password) VALUES(?,?,?);";
+//     const inserts = [username, email, password];
+//     const query = mysql.format(sql, inserts);
+//     pool.executeQuery(query, function(err, results) {
+//         if (err) {
+//             throw err;
+//         }
+//         callback(null, results);
+//     })
+// }
 
 // UPDATE
 function editThread(user_id, thread_id, thread_title, thread_text, callback) {
@@ -122,3 +148,4 @@ module.exports.editThread = editThread;
 module.exports.editComment = editComment;
 module.exports.getThreadsBy10 = getThreadsBy10;
 module.exports.getComments = getComments;
+module.exports.getLogin = getLogin;

@@ -1,0 +1,48 @@
+<h1>Bienvenido</h1>
+<div>
+    <p>
+        <a href="/user/info">
+            <i class="fas fa-user"></i>
+            <span>
+                Panel del usuario
+            </span>
+        </a>
+        <a href="/thread/create">
+            <i class="fas fa-comment"></i>
+            <span>
+                Crear thread
+            </span>
+        </a>
+        <a href="/logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>
+                Logout
+            </span>
+        </a>
+    </p>
+    <form action="/search" method="get">
+        <input type="text" name="search-get" id="search-get" placeholder="Search">
+        <input type="submit" value="Search">
+    </form>
+    <p> {{pages}} </p>
+</div>
+<div class="menu">
+    {{{createMenu index upperLimit}}}
+</div>
+
+{{#each threads}}
+<div class="thread" id="thread-{{this.thread_id}}">
+    <div class="thread-info">
+        <span class="thread-title">Title: {{this.thread_title}}</span>
+        <span class="thread-time">Date: {{formatDate this.thread_time}}</span>
+        <span>ID: {{this.thread_id}}</span>
+    </div>
+    <div class="thread-content">
+        <a href="/thread/{{this.thread_id}}">
+            <img src="{{noBlur this.thread_image}}" alt="Image">
+        </a>
+        <p>{{this.thread_text}}</p>
+    </div>
+</div>
+
+{{/each}}
